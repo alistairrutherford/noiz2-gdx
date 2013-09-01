@@ -19,6 +19,7 @@ Main Game
 Build Instructions
 -------------------
 
+https://github.com/alistairrutherford/noiz2-gdx/wiki/Build-Instructions
 
 License
 --------
