@@ -7,13 +7,15 @@ This is my original port of Kenta Chos esoteric shooter converted to use LibGDX 
 
 It's very much a work in progress. The preferences and difficulty levels are not persisted yet.
 
-A word of warning, Kentas code is completely impossible to follow. 
+The codebase consists of a slightly modified set of the original game files (in their own package) and all the additions in another package.
+
 
 My original contributions were:
 
-- rewrite the bulletml parser 
-- abstract the drawing primitives
-- OpenGL and Canvas renderers
+- rewrite the bulletml parser to use XML Pull parser.
+- abstract the drawing primitives.
+- OpenGL and Canvas renderers.
+- difficulty settings.
 
 The only renderer now is OpenGL as that's what LibGDX uses.
 
