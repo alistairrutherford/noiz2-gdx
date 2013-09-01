@@ -9,6 +9,8 @@ It's very much a work in progress. The preferences and difficulty levels are not
 
 A word of warning, Kentas code is completely impossible to follow. My particular contribution here was to rewrite the bulletml parser and abstract the drawing primitives so you can actually port this to varying platforms.
 
+The use of LibGDX brings some nice additions such as the moving star background and the sliding transitions between screens.
+
 Launch view.
 
 ![Demo](https://github.com/alistairrutherford/images/raw/master/noiz2_1.png) 
