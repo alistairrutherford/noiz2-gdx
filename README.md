@@ -7,10 +7,10 @@ This is my orignal port of Kenta Chos esoteric shooter converted to use the LibG
 
 It's very much a work in progress. The preferences and difficulty levels are not persisted.
 
-Menu
+Launch view.
 
 ![Demo](https://github.com/alistairrutherford/images/raw/master/noiz2_1.png) 
 
-Game Screen
+Main Game
 
 ![Demo](https://github.com/alistairrutherford/images/raw/master/noiz2_2.png)
