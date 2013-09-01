@@ -3,9 +3,11 @@ noiz2-gdx
 
 Noiz2 - Vector Shoot Em Up
 
-This is my orignal port of Kenta Chos esoteric shooter converted to use  LibGDX and my netthreads-libgdx extensions library.
+This is my original port of Kenta Chos esoteric shooter converted to use LibGDX and my netthreads-libgdx extensions library.
 
-It's very much a work in progress. The preferences and difficulty levels are not persisted.
+It's very much a work in progress. The preferences and difficulty levels are not persisted yet.
+
+A word of warning, Kentas code is completely impossible to follow. My particular contribution here was to rewrite the bulletml parser and abstract the drawing primitives so you can actually port this to varying platforms.
 
 Launch view.
 
