@@ -16,12 +16,17 @@
 
 package com.netthreads.gdx.app.platform;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+import com.google.inject.Singleton;
+
 /**
- * This is a shadow of the preferences manager from the original game.
+ * This is a version of the preferences manager from the original game.
  * 
- * Preference management is a handy way to persist the game state.
+ * Persist the game state.
  * 
  */
+@Singleton
 public class GameState
 {
 	public static final String NAME = "gamestate";
@@ -31,26 +36,13 @@ public class GameState
 	public static final String STAGE_OPENED_TXT = "opened_";
 	public static final String STAGE_CLEARED_TXT = "cleared_";
 
-	// Preferences
-	private static GameState instance = null;
-
-	/**
-	 * Singleton access.
-	 * 
-	 * @param context
-	 * 
-	 * @return The preferences object.
-	 */
-	public static GameState getInstance()
-	{
-		if (instance == null)
-		{
-			instance = new GameState();
-		}
-
-		return instance;
-	}
-
+	private Preferences preferences;
+	
+	public GameState()
+    {
+		preferences = Gdx.app.getPreferences(NAME);
+    }
+	
 	/**
 	 * Store stage score.
 	 * 
@@ -61,7 +53,8 @@ public class GameState
 	 */
 	public void setStageScore(int index, int value)
 	{
-		// Store: STAGE_SCORE_TXT+index, value;
+		preferences.putInteger(STAGE_SCORE_TXT+index, value);
+		preferences.flush();
 	}
 
 	/**
@@ -71,7 +64,7 @@ public class GameState
 	 */
 	public int getStageScore(int index)
 	{
-		int value = 0; // Get: STAGE_SCORE_TXT+index, 0);
+		int value = preferences.getInteger(STAGE_SCORE_TXT+index, 0);
 
 		return value;
 	}
@@ -86,7 +79,8 @@ public class GameState
 	 */
 	public void setSceneScore(int index, int value)
 	{
-		// Store: SCENE_SCORE_TXT+index, value
+		preferences.putInteger(SCENE_SCORE_TXT+index, value);
+		preferences.flush();
 	}
 
 	/**
@@ -96,7 +90,7 @@ public class GameState
 	 */
 	public int getSceneScore(int index)
 	{
-		int value = 0; // Get: SCENE_SCORE_TXT+index, 0
+		int value = preferences.getInteger(SCENE_SCORE_TXT+index, 0);
 
 		return value;
 	}
@@ -111,7 +105,8 @@ public class GameState
 	 */
 	public void setStageOpened(int index, boolean status)
 	{
-		// Store: STAGE_OPENED_TXT+index, status
+		preferences.putBoolean(STAGE_OPENED_TXT+index, status);
+		preferences.flush();
 	}
 
 	/**
@@ -121,7 +116,7 @@ public class GameState
 	 */
 	public boolean getStageOpened(int index)
 	{
-		boolean value = true; // Get: STAGE_OPENED_TXT+index, false;
+		boolean value = preferences.getBoolean(STAGE_OPENED_TXT+index, false);
 
 		return value;
 	}
@@ -136,7 +131,8 @@ public class GameState
 	 */
 	public void setStageCleared(int index, boolean status)
 	{
-		// Store: STAGE_CLEARED_TXT+index, status
+		preferences.putBoolean(STAGE_CLEARED_TXT+index, status);
+		preferences.flush();
 	}
 
 	/**
@@ -146,7 +142,7 @@ public class GameState
 	 */
 	public boolean getStageCleared(int index)
 	{
-		boolean value = true; // Get : STAGE_CLEARED_TXT+index, false;
+		boolean value = preferences.getBoolean(STAGE_CLEARED_TXT+index, false);
 
 		return value;
 	}

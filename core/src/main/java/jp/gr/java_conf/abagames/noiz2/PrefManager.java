@@ -46,6 +46,8 @@ public class PrefManager
     
     private boolean[] stageCleared = new boolean[AttractManager.STAGE_NUM];
 
+    private GameState gameState;
+    
     /*
      * Stages are locked until some stages are cleared.
      */
@@ -63,6 +65,10 @@ public class PrefManager
             { 8, 9 }  // 10
         };
     
+    public PrefManager(GameState gameState) 
+    {
+		this.gameState = gameState;
+	}
     
     /**
      * Initialise stage state.
@@ -96,9 +102,7 @@ public class PrefManager
      */
     public void save()
     {
-        GameState gameState = GameState.getInstance();
-        
-        for (int i = 0; i < AttractManager.STAGE_NUM; i++)
+         for (int i = 0; i < AttractManager.STAGE_NUM; i++)
         {
             gameState.setStageScore(i, stageScore[i]);
             if (stageOpened[i]) gameState.setStageOpened(i, stageOpened[i]);
@@ -123,8 +127,6 @@ public class PrefManager
      */
     public void load()
     {
-        GameState gameState = GameState.getInstance();
-
         for (int i = 0; i < AttractManager.STAGE_NUM; i++)
         {
             stageScore[i] = gameState.getStageScore(i);

@@ -35,6 +35,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.netthreads.gdx.app.core.Noiz2GDX;
 import com.netthreads.gdx.app.definition.AppEvents;
 import com.netthreads.gdx.app.definition.AppSoundDefinitions;
+import com.netthreads.gdx.app.platform.GameState;
 import com.netthreads.gdx.app.platform.ScreenGDX;
 import com.netthreads.gdx.app.platform.StateData;
 import com.netthreads.gdx.app.platform.StateManager;
@@ -66,6 +67,8 @@ public class GameLayer extends Layer implements ActorEventObserver
 	
 	private ApplicationProperties preferences;
 	
+	private GameState gameState;
+	
 	private ScreenGDX screen = null;
 	
 	private StateData state = null;
@@ -95,6 +98,7 @@ public class GameLayer extends Layer implements ActorEventObserver
 		director = AppInjector.getInjector().getInstance(Director.class);
 		soundCache = AppInjector.getInjector().getInstance(SoundCache.class);
 		preferences = AppInjector.getInjector().getInstance(ApplicationProperties.class);
+		gameState = AppInjector.getInjector().getInstance(GameState.class);
 		
 		loadTextures();
 		
@@ -141,7 +145,7 @@ public class GameLayer extends Layer implements ActorEventObserver
 		// ---------------------------------------------------------------
 		// Good luck figuring any of Kenta code out.
 		// ---------------------------------------------------------------
-		prefManager = new PrefManager();
+		prefManager = new PrefManager(gameState);
 		
 		barrageManager = new BarrageManager(state, preferences);
 		bulletmlPlayer = new BulletmlPlayer(screen);

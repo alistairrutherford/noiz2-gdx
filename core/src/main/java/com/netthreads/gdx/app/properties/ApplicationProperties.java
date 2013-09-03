@@ -62,6 +62,10 @@ public class ApplicationProperties
 	
 	private Preferences preferences;
 
+	/**
+	 * Construct properties.
+	 * 
+	 */
 	public ApplicationProperties()
     {
 		preferences = Gdx.app.getPreferences(NAME);
@@ -88,6 +92,7 @@ public class ApplicationProperties
 	public void setRank(int value)
 	{
 		preferences.putInteger(RANK_KEY, value);
+		preferences.flush();
 	}
 
 	/**
@@ -111,6 +116,7 @@ public class ApplicationProperties
 	public void setLineWidth(int value)
 	{
 		preferences.putInteger(LINE_WIDTH_KEY, value);
+		preferences.flush();
 	}
 
 	/**
@@ -134,6 +140,7 @@ public class ApplicationProperties
 	public void setFighterOffset(int value)
 	{
 		preferences.putInteger(FIGHTER_OFFSET_KEY, value);
+		preferences.flush();
 	}
 
 	/**
@@ -157,6 +164,7 @@ public class ApplicationProperties
 	public void setTrackballVelocity(int value)
 	{
 		preferences.putInteger(TRACKBALL_VELOCITY_KEY, value);
+		preferences.flush();
 	}
 
 	/**
@@ -180,6 +188,7 @@ public class ApplicationProperties
 	public void setSound(boolean value)
 	{
 		preferences.putBoolean(SOUND_TEXT, value);
+		preferences.flush();
 	}
 
 	/**
@@ -203,6 +212,7 @@ public class ApplicationProperties
 	public void setShowProfile(boolean value)
 	{
 		preferences.putBoolean(SHOW_PROFILE_KEY, value);
+		preferences.flush();
 	}
 
 	/**
@@ -226,6 +236,7 @@ public class ApplicationProperties
 	public void setRenderer(boolean value)
 	{
 		preferences.putBoolean(RENDER_KEY, value);
+		preferences.flush();
 	}
 
 	/**
@@ -249,6 +260,7 @@ public class ApplicationProperties
 	public void setPlayMode(String value)
 	{
 		preferences.putString(PLAY_MODE_KEY, value);
+		preferences.flush();
 	}
 
 	/**
@@ -271,5 +283,6 @@ public class ApplicationProperties
 	public void setVolume(float volume)
 	{
 		preferences.putFloat(SOUND_VOLUME, DEFAULT_VOLUME);
+		preferences.flush();
 	}	
 }
