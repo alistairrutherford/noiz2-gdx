@@ -35,7 +35,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.netthreads.gdx.app.definition.AppEvents;
 import com.netthreads.gdx.app.definition.AppTextureDefinitions;
-import com.netthreads.gdx.app.properties.GameProperties;
+import com.netthreads.gdx.app.properties.ApplicationProperties;
 import com.netthreads.libgdx.director.AppInjector;
 import com.netthreads.libgdx.director.Director;
 import com.netthreads.libgdx.scene.Layer;
@@ -63,7 +63,7 @@ public class SettingsLayer extends Layer
 	/**
 	 * Singletons
 	 */
-	private GameProperties gameProperties;
+	private ApplicationProperties gameProperties;
 	private TextureCache textureCache;
 
 	/**
@@ -81,7 +81,7 @@ public class SettingsLayer extends Layer
 
 		textureCache = AppInjector.getInjector().getInstance(TextureCache.class);
 		
-		gameProperties = AppInjector.getInjector().getInstance(GameProperties.class);
+		gameProperties = AppInjector.getInjector().getInstance(ApplicationProperties.class);
 		
 		Gdx.input.setCatchBackKey(true);
 
@@ -124,14 +124,17 @@ public class SettingsLayer extends Layer
 		final Label titleLabel = new Label("Settings", skin, URL_LABEL_FONT, Color.YELLOW);
 		
 		final CheckBox checkBox = new CheckBox("", skin);
-		checkBox.setChecked(gameProperties.isAudioOn());
+		checkBox.setChecked(gameProperties.getSound());
 		checkBox.size(20, 20);
-
-		final Label soundLabel = new Label("Sound", skin);
-
+		final Label soundLabel = new Label(ApplicationProperties.SOUND_TEXT, skin);
+		
 		final Slider slider = new Slider(0, 10, 1, false, skin);
 		slider.setValue(gameProperties.getVolume());
-		final Label volumeLabel = new Label("Volume", skin);
+		final Label volumeLabel = new Label(ApplicationProperties.SOUND_VOLUME, skin);
+
+		final Slider fighterOffsetSlider = new Slider(0, 10, 1, false, skin);
+		slider.setValue(gameProperties.getFighterOffset());
+		final Label fighterOffsetLabel = new Label(ApplicationProperties.FIGHTER_OFFSET_KEY, skin);
 		
 		// ---------------------------------------------------------------
 		// Table
@@ -151,6 +154,10 @@ public class SettingsLayer extends Layer
 		table.row();
 		table.add(slider);
 		table.row();
+		table.add(fighterOffsetLabel).expandY().expandX();
+		table.row();
+		table.add(fighterOffsetSlider);
+		table.row();
 
 		table.setFillParent(true);
 
@@ -167,7 +174,7 @@ public class SettingsLayer extends Layer
 			{
 				boolean setting = checkBox.isChecked();
 
-				gameProperties.setAudioOn(setting);
+				gameProperties.setSound(setting);
 			}
 
 		});

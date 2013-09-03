@@ -38,7 +38,7 @@ import com.netthreads.gdx.app.definition.AppSoundDefinitions;
 import com.netthreads.gdx.app.platform.ScreenGDX;
 import com.netthreads.gdx.app.platform.StateData;
 import com.netthreads.gdx.app.platform.StateManager;
-import com.netthreads.gdx.app.properties.GameProperties;
+import com.netthreads.gdx.app.properties.ApplicationProperties;
 import com.netthreads.libgdx.director.AppInjector;
 import com.netthreads.libgdx.director.Director;
 import com.netthreads.libgdx.event.ActorEvent;
@@ -64,7 +64,7 @@ public class GameLayer extends Layer implements ActorEventObserver
 	
 	private SoundCache soundCache;
 	
-	private GameProperties gameProperties;
+	private ApplicationProperties preferences;
 	
 	private ScreenGDX screen = null;
 	
@@ -93,8 +93,8 @@ public class GameLayer extends Layer implements ActorEventObserver
 		// ---------------------------------------------------------------
 		// ---------------------------------------------------------------
 		director = AppInjector.getInjector().getInstance(Director.class);
-		gameProperties = AppInjector.getInjector().getInstance(GameProperties.class);
 		soundCache = AppInjector.getInjector().getInstance(SoundCache.class);
+		preferences = AppInjector.getInjector().getInstance(ApplicationProperties.class);
 		
 		loadTextures();
 		
@@ -136,14 +136,14 @@ public class GameLayer extends Layer implements ActorEventObserver
 		// ---------------------------------------------------------------
 		// ---------------------------------------------------------------
 		state = new StateData(width, height);
-		stateManager = new StateManager(state, gameProperties.getTouchOffset());
+		stateManager = new StateManager(state, preferences.getFighterOffset());
 		
 		// ---------------------------------------------------------------
 		// Good luck figuring any of Kenta code out.
 		// ---------------------------------------------------------------
 		prefManager = new PrefManager();
 		
-		barrageManager = new BarrageManager(state);
+		barrageManager = new BarrageManager(state, preferences);
 		bulletmlPlayer = new BulletmlPlayer(screen);
 		
 		ship = new Ship(barrageManager, bulletmlPlayer, prefManager, state);
@@ -263,23 +263,23 @@ public class GameLayer extends Layer implements ActorEventObserver
 		switch (event.getId())
 		{
 			case AppEvents.EVENT_PLAY_EXPLOSION_A:
-				if (gameProperties.isAudioOn())
+				if (preferences.getSound())
 				{
-					soundCache.get(AppSoundDefinitions.SOUND_EXPLOSION_1).play(gameProperties.getVolume());
+					soundCache.get(AppSoundDefinitions.SOUND_EXPLOSION_1).play(preferences.getVolume());
 				}
 				handled = true;
 				break;
 			case AppEvents.EVENT_PLAY_EXPLOSION_B:
-				if (gameProperties.isAudioOn())
+				if (preferences.getSound())
 				{
-					soundCache.get(AppSoundDefinitions.SOUND_EXPLOSION_2).play(gameProperties.getVolume());
+					soundCache.get(AppSoundDefinitions.SOUND_EXPLOSION_2).play(preferences.getVolume());
 				}
 				handled = true;
 				break;
 			case AppEvents.EVENT_PLAY_ZAP:
-				if (gameProperties.isAudioOn())
+				if (preferences.getSound())
 				{
-					soundCache.get(AppSoundDefinitions.SOUND_ZAP).play(gameProperties.getVolume());
+					soundCache.get(AppSoundDefinitions.SOUND_ZAP).play(preferences.getVolume());
 				}
 				handled = true;
 				break;

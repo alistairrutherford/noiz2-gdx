@@ -63,7 +63,7 @@ public class ScreenGDX implements IScreen
 	@Override
 	public void clear()
 	{
-		// TODO Auto-generated method stub
+		// Not used in this port
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public class ScreenGDX implements IScreen
 	@Override
 	public void drawBitmap(String name, int left, int top)
 	{
-		
+		// Not used in this port
 	}
 
 }

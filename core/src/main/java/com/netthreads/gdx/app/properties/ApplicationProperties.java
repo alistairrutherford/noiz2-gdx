@@ -13,12 +13,21 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
-package com.netthreads.gdx.app.platform;
+package com.netthreads.gdx.app.properties;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
+import com.google.inject.Singleton;
 
 
-public class ApplicationPreferences
+/**
+ * Application properties.
+ *
+ */
+@Singleton
+public class ApplicationProperties
 {
-	public static final String NAME = "preferences";
+	public static final String NAME = "noiz2-preferences";
 
 	public static final String SOUND_TEXT = "Sound on/off";
 	public static final boolean SOUND_DEFAULT = true;
@@ -48,36 +57,15 @@ public class ApplicationPreferences
 	public static final String PLAY_MODE_KEY = "Mode";
 	public static String PLAY_MODE_DEFAULT = "";
 
-	// Preferences
-	private static ApplicationPreferences instance = null;
+	public static final String SOUND_VOLUME = "Volume";
+	private static final float DEFAULT_VOLUME = 0.1f;
+	
+	private Preferences preferences;
 
-	/**
-	 * Singleton access.
-	 * 
-	 * @param context
-	 * 
-	 * @return The preferences object.
-	 */
-	public static ApplicationPreferences getInstance()
-	{
-		if (instance == null)
-		{
-			instance = new ApplicationPreferences();
-		}
-
-		return instance;
-	}
-
-	/**
-	 * Initialise preference context
-	 * 
-	 * @param context
-	 */
-	public void init()
-	{
-		// Initialise default play mode.
-		ApplicationPreferences.PLAY_MODE_DEFAULT = "Original";
-	}
+	public ApplicationProperties()
+    {
+		preferences = Gdx.app.getPreferences(NAME);
+    }
 
 	/**
 	 * Return Rank
@@ -86,9 +74,7 @@ public class ApplicationPreferences
 	 */
 	public int getRank()
 	{
-		int value = RANK_DEFAULT;
-
-		// get: RANK_KEY, RANK_DEFAULT;
+		int value = preferences.getInteger(RANK_KEY, RANK_DEFAULT);
 
 		return value;
 	}
@@ -101,7 +87,7 @@ public class ApplicationPreferences
 	 */
 	public void setRank(int value)
 	{
-		// Put: RANK_KEY, value;
+		preferences.putInteger(RANK_KEY, value);
 	}
 
 	/**
@@ -111,9 +97,7 @@ public class ApplicationPreferences
 	 */
 	public int getLineWidth()
 	{
-		int value = LINE_WIDTH_DEFAULT;
-
-		// Get : LINE_WIDTH_KEY, LINE_WIDTH_DEFAULT;
+		int value = preferences.getInteger(LINE_WIDTH_KEY, LINE_WIDTH_DEFAULT);
 
 		return value;
 	}
@@ -126,7 +110,7 @@ public class ApplicationPreferences
 	 */
 	public void setLineWidth(int value)
 	{
-		// Set: LINE_WIDTH_KEY, value);
+		preferences.putInteger(LINE_WIDTH_KEY, value);
 	}
 
 	/**
@@ -136,9 +120,7 @@ public class ApplicationPreferences
 	 */
 	public int getFighterOffset()
 	{
-		int value = FIGHTER_OFFSET_DEFAULT;
-
-		// Get: FIGHTER_OFFSET_KEY, FIGHTER_OFFSET_DEFAULT;
+		int value = preferences.getInteger(FIGHTER_OFFSET_KEY, FIGHTER_OFFSET_DEFAULT);
 
 		return value;
 	}
@@ -151,7 +133,7 @@ public class ApplicationPreferences
 	 */
 	public void setFighterOffset(int value)
 	{
-		// Set: FIGHTER_OFFSET_KEY, value);
+		preferences.putInteger(FIGHTER_OFFSET_KEY, value);
 	}
 
 	/**
@@ -161,9 +143,7 @@ public class ApplicationPreferences
 	 */
 	public int getTrackballVelocity()
 	{
-		int value = TRACKBALL_VELOCITY_DEFAULT;
-
-		// Get : TRACKBALL_VELOCITY_KEY, TRACKBALL_VELOCITY_DEFAULT);
+		int value = preferences.getInteger(TRACKBALL_VELOCITY_KEY, TRACKBALL_VELOCITY_DEFAULT);
 
 		return value;
 	}
@@ -176,7 +156,7 @@ public class ApplicationPreferences
 	 */
 	public void setTrackballVelocity(int value)
 	{
-		// Set: TRACKBALL_VELOCITY_KEY, value);
+		preferences.putInteger(TRACKBALL_VELOCITY_KEY, value);
 	}
 
 	/**
@@ -186,22 +166,7 @@ public class ApplicationPreferences
 	 */
 	public boolean getSound()
 	{
-		boolean value = SOUND_DEFAULT;
-		// GET :SOUND_TEXT, SOUND_DEFAULT);
-
-		return value;
-	}
-
-	/**
-	 * Return profiler setting
-	 * 
-	 * @return value
-	 */
-	public boolean getShowProfile()
-	{
-		boolean value = SHOW_PROFILE_DEFAULT;
-
-		// Get : SHOW_PROFILE_KEY, SHOW_PROFILE_DEFAULT);
+		boolean value = preferences.getBoolean(SOUND_TEXT, SOUND_DEFAULT);
 
 		return value;
 	}
@@ -214,7 +179,19 @@ public class ApplicationPreferences
 	 */
 	public void setSound(boolean value)
 	{
-		// Set : SOUND_TEXT, value);
+		preferences.putBoolean(SOUND_TEXT, value);
+	}
+
+	/**
+	 * Return profiler setting
+	 * 
+	 * @return value
+	 */
+	public boolean getShowProfile()
+	{
+		boolean value = preferences.getBoolean(SHOW_PROFILE_KEY, SHOW_PROFILE_DEFAULT);
+
+		return value;
 	}
 
 	/**
@@ -225,7 +202,7 @@ public class ApplicationPreferences
 	 */
 	public void setShowProfile(boolean value)
 	{
-		// Set SHOW_PROFILE_KEY, value);
+		preferences.putBoolean(SHOW_PROFILE_KEY, value);
 	}
 
 	/**
@@ -235,9 +212,7 @@ public class ApplicationPreferences
 	 */
 	public boolean getRenderer()
 	{
-		boolean value = RENDER_DEFAULT;
-
-		// get RENDER_KEY, RENDER_DEFAULT);
+		boolean value = preferences.getBoolean(RENDER_KEY, RENDER_DEFAULT);
 
 		return value;
 	}
@@ -250,7 +225,7 @@ public class ApplicationPreferences
 	 */
 	public void setRenderer(boolean value)
 	{
-		// Set : RENDER_KEY, value);
+		preferences.putBoolean(RENDER_KEY, value);
 	}
 
 	/**
@@ -260,9 +235,7 @@ public class ApplicationPreferences
 	 */
 	public String getPlayMode()
 	{
-		String value = PLAY_MODE_DEFAULT;
-
-		// Get :PLAY_MODE_KEY, PLAY_MODE_DEFAULT);
+		String value = preferences.getString(PLAY_MODE_KEY, PLAY_MODE_DEFAULT);
 
 		return value;
 	}
@@ -275,7 +248,28 @@ public class ApplicationPreferences
 	 */
 	public void setPlayMode(String value)
 	{
-		// Set :PLAY_MODE_KEY, value);
+		preferences.putString(PLAY_MODE_KEY, value);
 	}
 
+	/**
+	 * Return sound volume.
+	 *
+	 * @return the volume.
+	 */
+	public float getVolume()
+	{
+		float value = preferences.getFloat(SOUND_VOLUME);
+		
+		return value;
+	}
+
+	/**
+	 * Put volume.
+	 * 
+	 * @param volume
+	 */
+	public void setVolume(float volume)
+	{
+		preferences.putFloat(SOUND_VOLUME, DEFAULT_VOLUME);
+	}	
 }

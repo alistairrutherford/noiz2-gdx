@@ -38,8 +38,8 @@ import jp.gr.java_conf.abagames.bulletml.BulletImpl;
 import jp.gr.java_conf.abagames.bulletml.BulletmlManager;
 import jp.gr.java_conf.abagames.bulletml.BulletmlPlayer;
 
-import com.netthreads.gdx.app.platform.ApplicationPreferences;
 import com.netthreads.gdx.app.platform.StateData;
+import com.netthreads.gdx.app.properties.ApplicationProperties;
 
 /**
  * Barrage pattern manager.
@@ -162,16 +162,16 @@ public class BarrageManager
 	private int[] pax = new int[QUICK_APP_NUM];
 	private int[] pay = new int[QUICK_APP_NUM];
 
-	private ApplicationPreferences preferences = null;
+	private ApplicationProperties preferences = null;
 
 	/**
 	 * Load the files of BulletML.
 	 * 
 	 * @throws Exception
 	 */
-	public BarrageManager(StateData state)
+	public BarrageManager(StateData state, ApplicationProperties preferences)
 	{
-		this.preferences = ApplicationPreferences.getInstance();
+		this.preferences = preferences;
 
 		this.screenWidth = state.viewWidth;
 		this.screenHeight = state.viewHeight;
@@ -240,7 +240,7 @@ public class BarrageManager
 		}
 
 		// Examine the play mode. Custom setting allows the adjustable difficulty
-		if (preferences.getPlayMode().equals(ApplicationPreferences.PLAY_MODE_DEFAULT))
+		if (preferences.getPlayMode().equals(ApplicationProperties.PLAY_MODE_DEFAULT))
 		{
 			initQueue((long) stageSpec[stage][0]);
 
