@@ -51,13 +51,13 @@ public class AboutLayer extends Layer
 	private Label urlLabel;
 	private Label versionLabel;
 
-	private static final String instructionsText = "Control your ship by mouse and avoid the barrage." +
+	private static final String instructionsText = "Control your ship and avoid the barrage." +
 			"To destroy enemies, position your ship on the front of an enemy. \n" +
 			"A laser locks the enemy and destroy it.\n" +
 			"A green star is the bonus item. \n"+"" +
 			"A score of the item(displayed at the right-up corner) \n" +
 			"increases if you get items continuously.";
-			
+	
 	/**
 	 * The one and only director.
 	 */
@@ -119,7 +119,7 @@ public class AboutLayer extends Layer
 		// ---------------------------------------------------------------
 		// Labels
 		// ---------------------------------------------------------------
-		urlLabel = new Label(instructionsText, skin, URL_LABEL_FONT, Color.WHITE);
+		urlLabel = new Label("www.netthreads.co.uk", skin, URL_LABEL_FONT, Color.WHITE);
 
 		versionLabel = new Label(Noiz2GDX.VERSION_TEXT, skin, URL_LABEL_FONT, Color.WHITE);
 
