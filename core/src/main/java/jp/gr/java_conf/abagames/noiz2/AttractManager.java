@@ -47,6 +47,7 @@ public class AttractManager
 {
     private static final int BOX_SIZE = 32;
     
+    private static final String TEXT_START = "START";
 	public static final int TITLE = 0;
 	public static final int IN_GAME = 1;
 	public static final int GAME_OVER = 2;
@@ -295,7 +296,7 @@ public class AttractManager
 		{
 			if ((cnt & 63) < 32)
 			{
-				LetterRender.drawString("START", screenWidth / 3, stBtnY + 6, 8, Colors.LETTER_COLOR);
+				LetterRender.drawString(TEXT_START, (screenWidth / 2)-TEXT_START.length(), stBtnY + 6, 8, Colors.LETTER_COLOR);
 			}
 			screen.drawLine(0, stBtnY, screenWidth, stBtnY, Colors.BOX_COLOR1);
 			LetterRender.drawStringFromRight(stageStr, screenWidth, 40, 10, Colors.LETTER_COLOR);
