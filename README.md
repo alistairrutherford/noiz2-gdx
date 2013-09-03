@@ -12,10 +12,13 @@ The codebase consists of a slightly modified set of the original game files (in 
 
 My original contributions were:
 
-- rewrite the bulletml parser to use XML Pull parser. This was so it would work with Android.
-- abstract the drawing primitives to ease the application of different rendering modes.
+- Rewrite the bulletml parser to use XML Pull parser. This was so it would work with Android.
+- Abstract the drawing primitives to ease the application of different rendering modes.
 - OpenGL and Canvas renderers because I was being bloody minded.
-- difficulty settings as the original on a phone was insanely difficult (it still is..a bit).
+- Difficulty settings as the original on a phone was insanely difficult (it still is..a bit).
+- Settings screen which persists the user settings. I have tried to redo in this version.
+- Persistence of the stage progress which is in this version as well.
+- Profiling which is now going to be a 'display FPS' mode.
 
 The only renderer now is OpenGL as that's what LibGDX uses.
 
