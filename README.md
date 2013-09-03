@@ -20,6 +20,7 @@ My original contributions were:
 The only renderer now is OpenGL as that's what LibGDX uses.
 
 Now that I have ported it over to use LibGDX it brings some nice additions such as the moving star background and the sliding transitions between screens.
+Plus I am tidying up a lot of the original code as well.
 
 Launch view.
 
