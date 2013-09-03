@@ -1,7 +1,7 @@
 /**
  * Copyright 2002 Kenta Cho. All rights reserved.
  * 			Original
- * Copyright (C) 2009 Alistair Rutherford, Glasgow, Scotland, UK, www.netthreads.co.uk
+ * Copyright (C) 2013 Alistair Rutherford, Glasgow, Scotland, UK, www.netthreads.co.uk
  * 			Various modifications.
  * 
  * Redistribution and use in source and binary forms,
@@ -35,7 +35,6 @@ package jp.gr.java_conf.abagames.noiz2;
 
 import jp.gr.java_conf.abagames.bulletml.Colors;
 
-import com.netthreads.gdx.app.definition.AppTextureDefinitions;
 import com.netthreads.gdx.app.platform.IScreen;
 import com.netthreads.gdx.app.platform.StateData;
 
@@ -115,15 +114,12 @@ public class AttractManager
 	public void loadImages()
 	{
 		// Not used in this port.
-        titleImage[0] = AppTextureDefinitions.TEXTURE_N;
-        titleImage[1] = AppTextureDefinitions.TEXTURE_O;
-        titleImage[2] = AppTextureDefinitions.TEXTURE_I;
-        titleImage[3] = AppTextureDefinitions.TEXTURE_Z;
-        titleImage[4] = AppTextureDefinitions.TEXTURE_2;
+		// This used to hold the noiz2 letter bitmaps for show when the title is on screen. We don't need it anymore.
 	}
 
 	/*
 	 * Initialize title/game/gameover/stageclear.
+	 * 
 	 */
 	private int selectedStage;
 	private boolean inDemo;

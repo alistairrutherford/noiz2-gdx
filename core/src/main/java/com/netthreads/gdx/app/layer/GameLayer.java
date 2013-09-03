@@ -49,37 +49,37 @@ import com.netthreads.libgdx.sound.SoundCache;
 /**
  * Main Game layer.
  * 
- * Good luck figuring out Kenta code. LOL.
+ * Good luck figuring out Kentas code. LOL.
  * 
  */
 public class GameLayer extends Layer implements ActorEventObserver
 {
 	private static final String UI_FILE = "data/uiskin60.json";
 	private static final String URL_LABEL_FONT_SMALL = "default-font";
-
+	
 	/**
 	 * The one and only director.
 	 */
 	private Director director;
-
+	
 	private SoundCache soundCache;
-
+	
 	private GameProperties gameProperties;
-
+	
 	private ScreenGDX screen = null;
-
+	
 	private StateData state = null;
 	private StateManager stateManager = null;
 	private PrefManager prefManager = null;
-
+	
 	private BarrageManager barrageManager = null;
 	private BulletmlPlayer bulletmlPlayer = null;
 	private AttractManager attractManager = null;
 	private Ship ship = null;
-
+	
 	private Skin skin;
 	private Label titleLabel;
-
+	
 	/**
 	 * Create asteroid layer.
 	 * 
@@ -89,18 +89,18 @@ public class GameLayer extends Layer implements ActorEventObserver
 	{
 		setWidth(width);
 		setHeight(height);
-
+		
 		// ---------------------------------------------------------------
 		// ---------------------------------------------------------------
 		director = AppInjector.getInjector().getInstance(Director.class);
 		gameProperties = AppInjector.getInjector().getInstance(GameProperties.class);
 		soundCache = AppInjector.getInjector().getInstance(SoundCache.class);
-
+		
 		loadTextures();
-
+		
 		buildElements();
 	}
-
+	
 	/**
 	 * Load view textures.
 	 * 
@@ -109,7 +109,7 @@ public class GameLayer extends Layer implements ActorEventObserver
 	{
 		skin = new Skin(Gdx.files.internal(UI_FILE));
 	}
-
+	
 	/**
 	 * Build view elements.
 	 * 
@@ -118,58 +118,58 @@ public class GameLayer extends Layer implements ActorEventObserver
 	{
 		int width = Math.round(getWidth());
 		int height = Math.round(getHeight());
-
+		
 		titleLabel = new Label("NOIZ2", skin, URL_LABEL_FONT_SMALL, Color.YELLOW);
 		titleLabel.setX(0);
 		titleLabel.setY(32);
-
+		
 		// ---------------------------------------------------------------
 		// Screen
 		// ---------------------------------------------------------------
 		screen = new ScreenGDX(width, height);
-
+		
 		// ---------------------------------------------------------------
 		// Digital letter renderer (crazy stuff).
 		// ---------------------------------------------------------------
 		LetterRender.setScreen(screen);
-
+		
 		// ---------------------------------------------------------------
 		// ---------------------------------------------------------------
 		state = new StateData(width, height);
 		stateManager = new StateManager(state, gameProperties.getTouchOffset());
-
+		
 		// ---------------------------------------------------------------
 		// Good luck figuring any of Kenta code out.
 		// ---------------------------------------------------------------
 		prefManager = new PrefManager();
-
+		
 		barrageManager = new BarrageManager(state);
 		bulletmlPlayer = new BulletmlPlayer(screen);
-
+		
 		ship = new Ship(barrageManager, bulletmlPlayer, prefManager, state);
-
+		
 		attractManager = new AttractManager(screen, barrageManager, ship, prefManager, state, Noiz2GDX.VERSION_TEXT);
-
+		
 		// ---------------------------------------------------------------
 		// Load assets
 		// ---------------------------------------------------------------
-
+		
 		attractManager.loadImages();
-
+		
 		// ---------------------------------------------------------------
 		// Initialise Game elements
 		// ---------------------------------------------------------------
 		bulletmlPlayer.init(barrageManager, ship, attractManager);
-
+		
 		prefManager.init();
-
+		
 		prefManager.load();
-
+		
 		ship.init();
-
+		
 		attractManager.initTitle();
 	}
-
+	
 	/**
 	 * Called when layer is part of visible view but not yet displayed.
 	 * 
@@ -180,7 +180,7 @@ public class GameLayer extends Layer implements ActorEventObserver
 		// Add this as an event observer.
 		director.registerEventHandler(this);
 	}
-
+	
 	/**
 	 * Called when layer is no longer part of visible view.
 	 * 
@@ -189,11 +189,11 @@ public class GameLayer extends Layer implements ActorEventObserver
 	public void exit()
 	{
 		cleanup();
-
+		
 		// Remove this as an event observer.
 		director.deregisterEventHandler(this);
 	}
-
+	
 	/**
 	 * Reset game screen.
 	 * 
@@ -207,6 +207,9 @@ public class GameLayer extends Layer implements ActorEventObserver
 	/**
 	 * Draw layer.
 	 * 
+	 * Note, our vector graphics live outside the sprite batch begin..end. You
+	 * can't nest sprite batch and shape renderer.
+	 * 
 	 */
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha)
@@ -216,22 +219,22 @@ public class GameLayer extends Layer implements ActorEventObserver
 			titleLabel.setY(getHeight() - 34);
 			titleLabel.draw(batch, parentAlpha);
 		}
-
+		
 		batch.end();
-
+		
 		screen.setSpriteBatch(batch);
-
+		
 		stateManager.update();
-
+		
 		// Update view elements
 		bulletmlPlayer.update();
-
+		
 		// Draw view elements
 		bulletmlPlayer.draw();
-
+		
 		batch.begin();
 	}
-
+	
 	/**
 	 * Pooled layers need cleanup view elements.
 	 * 
@@ -242,12 +245,12 @@ public class GameLayer extends Layer implements ActorEventObserver
 		while (size > 0)
 		{
 			Actor actor = getChildren().get(--size);
-
+			
 			removeActor(actor);
 		}
-
+		
 	}
-
+	
 	/**
 	 * Handle events.
 	 * 
@@ -256,63 +259,63 @@ public class GameLayer extends Layer implements ActorEventObserver
 	public boolean handleEvent(ActorEvent event)
 	{
 		boolean handled = false;
-
+		
 		switch (event.getId())
 		{
-		case AppEvents.EVENT_PLAY_EXPLOSION_A:
-			if (gameProperties.isAudioOn())
-			{
-				soundCache.get(AppSoundDefinitions.SOUND_EXPLOSION_1).play(gameProperties.getVolume());
-			}
-			handled = true;
-			break;
-		case AppEvents.EVENT_PLAY_EXPLOSION_B:
-			if (gameProperties.isAudioOn())
-			{
-				soundCache.get(AppSoundDefinitions.SOUND_EXPLOSION_2).play(gameProperties.getVolume());
-			}
-			handled = true;
-			break;
-		case AppEvents.EVENT_PLAY_ZAP:
-			if (gameProperties.isAudioOn())
-			{
-				soundCache.get(AppSoundDefinitions.SOUND_ZAP).play(gameProperties.getVolume());
-			}
-			handled = true;
-			break;
-		default:
-			break;
+			case AppEvents.EVENT_PLAY_EXPLOSION_A:
+				if (gameProperties.isAudioOn())
+				{
+					soundCache.get(AppSoundDefinitions.SOUND_EXPLOSION_1).play(gameProperties.getVolume());
+				}
+				handled = true;
+				break;
+			case AppEvents.EVENT_PLAY_EXPLOSION_B:
+				if (gameProperties.isAudioOn())
+				{
+					soundCache.get(AppSoundDefinitions.SOUND_EXPLOSION_2).play(gameProperties.getVolume());
+				}
+				handled = true;
+				break;
+			case AppEvents.EVENT_PLAY_ZAP:
+				if (gameProperties.isAudioOn())
+				{
+					soundCache.get(AppSoundDefinitions.SOUND_ZAP).play(gameProperties.getVolume());
+				}
+				handled = true;
+				break;
+			default:
+				break;
 		}
-
+		
 		return handled;
 	}
-
+	
 	@Override
 	public boolean touchDown(int x, int y, int pointer, int button)
 	{
 		float touchX = (x * director.getScaleFactorX());
 		float touchY = (y * director.getScaleFactorY());
-
+		
 		state.controlX = touchX;
 		state.controlY = touchY;
-
+		
 		state.touched = true;
-
+		
 		return true;
 	}
-
+	
 	@Override
 	public boolean touchDragged(int x, int y, int pointer)
 	{
 		float touchX = (x * director.getScaleFactorX());
 		float touchY = (y * director.getScaleFactorY());
-
+		
 		state.controlX = touchX;
 		state.controlY = touchY;
-
+		
 		state.touched = true;
-
+		
 		return true;
 	}
-
+	
 }
