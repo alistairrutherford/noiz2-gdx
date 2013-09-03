@@ -34,28 +34,30 @@ public class ApplicationProperties
 
 	public static final String SOUND_VOLUME = "Volume";
 	private static final float DEFAULT_VOLUME = 10.1f;
-	
-	public static final String RANK_KEY = "Difficulty";
-	public static final int RANK_DEFAULT = 0;
-	public static final int RANK_MAX = 10;
-
-	public static final String LINE_WIDTH_KEY = "Line Width";
-	public static final int LINE_WIDTH_DEFAULT = 0;
-	public static final int LINE_WIDTH_MAX = 4;
 
 	public static final String FIGHTER_OFFSET_KEY = "Fighter Offset";
 	public static final int FIGHTER_OFFSET_DEFAULT = 10;
 	public static final int FIGHTER_OFFSET_MAX = 20;
-
-	public static final String TRACKBALL_VELOCITY_KEY = "Trackball Velocity";
-	public static final int TRACKBALL_VELOCITY_DEFAULT = 10;
-	public static final int TRACKBALL_VELOCITY_MAX = 30;
+	
+	public static final String RANK_KEY = "Difficulty";
+	public static final int RANK_DEFAULT = 0;
+	public static final int RANK_MAX = 10;
 
 	public static final String SHOW_PROFILE_KEY = "Show Profile";
 	public static final boolean SHOW_PROFILE_DEFAULT = false;
 
 	public static final String PLAY_MODE_KEY = "Mode";
 	public static String PLAY_MODE_DEFAULT = "";
+
+	// Not available (yet)
+	public static final String LINE_WIDTH_KEY = "Line Width";
+	public static final int LINE_WIDTH_DEFAULT = 0;
+	public static final int LINE_WIDTH_MAX = 4;
+
+	// Not available (yet)
+	public static final String TRACKBALL_VELOCITY_KEY = "Trackball Velocity";
+	public static final int TRACKBALL_VELOCITY_DEFAULT = 10;
+	public static final int TRACKBALL_VELOCITY_MAX = 30;
 	
 	private Preferences preferences;
 

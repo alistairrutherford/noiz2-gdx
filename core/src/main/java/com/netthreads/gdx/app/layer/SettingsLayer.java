@@ -152,6 +152,7 @@ public class SettingsLayer extends Layer
 		table.add(profileLabel).expandY();
 		table.row();
 		table.add(profileCheckBox);
+		table.row();
 
 		table.setFillParent(true);
 
