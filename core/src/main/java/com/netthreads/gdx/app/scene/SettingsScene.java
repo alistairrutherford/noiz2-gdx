@@ -20,6 +20,7 @@
 package com.netthreads.gdx.app.scene;
 
 import com.netthreads.gdx.app.layer.SettingsLayer;
+import com.netthreads.gdx.app.layer.StarsLayer;
 import com.netthreads.libgdx.scene.Layer;
 import com.netthreads.libgdx.scene.Scene;
 
@@ -30,9 +31,20 @@ import com.netthreads.libgdx.scene.Scene;
 public class SettingsScene extends Scene
 {
 	private Layer  group;
+	private Layer starsLayer;
 
 	public SettingsScene()
 	{
+		// ---------------------------------------------------------------
+		// Stars layer
+		// ---------------------------------------------------------------
+		starsLayer = new StarsLayer(getWidth(), getHeight());
+		//
+		addLayer(starsLayer);
+
+		// ---------------------------------------------------------------
+		// Settings layer
+		// ---------------------------------------------------------------
 		group = new SettingsLayer(getWidth(), getHeight());
 
 		getInputMultiplexer().addProcessor(group);

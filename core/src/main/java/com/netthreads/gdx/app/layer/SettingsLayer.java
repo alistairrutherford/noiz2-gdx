@@ -22,11 +22,9 @@ package com.netthreads.gdx.app.layer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
@@ -34,13 +32,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.netthreads.gdx.app.definition.AppEvents;
-import com.netthreads.gdx.app.definition.AppTextureDefinitions;
 import com.netthreads.gdx.app.properties.ApplicationProperties;
 import com.netthreads.libgdx.director.AppInjector;
 import com.netthreads.libgdx.director.Director;
 import com.netthreads.libgdx.scene.Layer;
-import com.netthreads.libgdx.texture.TextureCache;
-import com.netthreads.libgdx.texture.TextureDefinition;
 
 /**
  * Scene layer.
@@ -52,7 +47,6 @@ public class SettingsLayer extends Layer
 	private static final String URL_LABEL_FONT = "default-font";
 
 	private Table table;
-	private TextureRegion background;
 	private Skin skin;
 
 	/**
@@ -64,8 +58,7 @@ public class SettingsLayer extends Layer
 	 * Singletons
 	 */
 	private ApplicationProperties gameProperties;
-	private TextureCache textureCache;
-
+	
 	/**
 	 * Construct layer.
 	 * 
@@ -79,8 +72,6 @@ public class SettingsLayer extends Layer
 
 		director = AppInjector.getInjector().getInstance(Director.class);
 
-		textureCache = AppInjector.getInjector().getInstance(TextureCache.class);
-		
 		gameProperties = AppInjector.getInjector().getInstance(ApplicationProperties.class);
 		
 		Gdx.input.setCatchBackKey(true);
@@ -96,9 +87,6 @@ public class SettingsLayer extends Layer
 	 */
 	private void loadTextures()
 	{
-		TextureDefinition definition = textureCache.getDefinition(AppTextureDefinitions.TEXTURE_MENU_BACKGROUND);
-		background = textureCache.getTexture(definition);
-
 		skin = new Skin(Gdx.files.internal(UI_FILE));
 	}
 
@@ -108,16 +96,6 @@ public class SettingsLayer extends Layer
 	 */
 	private void buildElements()
 	{
-		// ---------------------------------------------------------------
-		// Background.
-		// ---------------------------------------------------------------
-		Image image = new Image(background);
-
-		image.setWidth(getWidth());
-		image.setHeight(getHeight());
-
-		addActor(image);
-
 		// ---------------------------------------------------------------
 		// Elements
 		// ---------------------------------------------------------------
@@ -135,6 +113,15 @@ public class SettingsLayer extends Layer
 		final Slider fighterOffsetSlider = new Slider(0, 10, 1, false, skin);
 		slider.setValue(gameProperties.getFighterOffset());
 		final Label fighterOffsetLabel = new Label(ApplicationProperties.FIGHTER_OFFSET_KEY, skin);
+
+		final Slider difficultySlider = new Slider(0, 10, 1, false, skin);
+		slider.setValue(gameProperties.getRank());
+		final Label difficultyLabel = new Label(ApplicationProperties.RANK_KEY, skin);
+
+		final CheckBox profileCheckBox = new CheckBox("", skin);
+		profileCheckBox.setChecked(gameProperties.getShowProfile());
+		profileCheckBox.size(20, 20);
+		final Label profileLabel = new Label(ApplicationProperties.SHOW_PROFILE_KEY, skin);
 		
 		// ---------------------------------------------------------------
 		// Table
@@ -158,6 +145,13 @@ public class SettingsLayer extends Layer
 		table.row();
 		table.add(fighterOffsetSlider);
 		table.row();
+		table.add(difficultyLabel).expandY().expandX();
+		table.row();
+		table.add(difficultySlider);
+		table.row();
+		table.add(profileLabel).expandY();
+		table.row();
+		table.add(profileCheckBox);
 
 		table.setFillParent(true);
 

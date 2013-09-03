@@ -32,6 +32,9 @@ public class ApplicationProperties
 	public static final String SOUND_TEXT = "Sound on/off";
 	public static final boolean SOUND_DEFAULT = true;
 
+	public static final String SOUND_VOLUME = "Volume";
+	private static final float DEFAULT_VOLUME = 10.1f;
+	
 	public static final String RANK_KEY = "Difficulty";
 	public static final int RANK_DEFAULT = 0;
 	public static final int RANK_MAX = 10;
@@ -51,14 +54,8 @@ public class ApplicationProperties
 	public static final String SHOW_PROFILE_KEY = "Show Profile";
 	public static final boolean SHOW_PROFILE_DEFAULT = false;
 
-	public static final String RENDER_KEY = "OpenGL";
-	public static final boolean RENDER_DEFAULT = true;
-
 	public static final String PLAY_MODE_KEY = "Mode";
 	public static String PLAY_MODE_DEFAULT = "";
-
-	public static final String SOUND_VOLUME = "Volume";
-	private static final float DEFAULT_VOLUME = 10.1f;
 	
 	private Preferences preferences;
 
@@ -212,30 +209,6 @@ public class ApplicationProperties
 	public void setShowProfile(boolean value)
 	{
 		preferences.putBoolean(SHOW_PROFILE_KEY, value);
-		preferences.flush();
-	}
-
-	/**
-	 * Return renderer setting
-	 * 
-	 * @return value
-	 */
-	public boolean getRenderer()
-	{
-		boolean value = preferences.getBoolean(RENDER_KEY, RENDER_DEFAULT);
-
-		return value;
-	}
-
-	/**
-	 * Set the renderer setting
-	 * 
-	 * @param The
-	 *            value
-	 */
-	public void setRenderer(boolean value)
-	{
-		preferences.putBoolean(RENDER_KEY, value);
 		preferences.flush();
 	}
 
