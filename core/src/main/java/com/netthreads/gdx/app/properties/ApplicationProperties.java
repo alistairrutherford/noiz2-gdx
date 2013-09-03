@@ -58,7 +58,7 @@ public class ApplicationProperties
 	public static String PLAY_MODE_DEFAULT = "";
 
 	public static final String SOUND_VOLUME = "Volume";
-	private static final float DEFAULT_VOLUME = 0.1f;
+	private static final float DEFAULT_VOLUME = 10.1f;
 	
 	private Preferences preferences;
 

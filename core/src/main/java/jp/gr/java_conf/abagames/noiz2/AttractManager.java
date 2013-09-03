@@ -32,7 +32,6 @@
  */
 package jp.gr.java_conf.abagames.noiz2;
 
-
 import jp.gr.java_conf.abagames.bulletml.Colors;
 
 import com.netthreads.gdx.app.platform.IScreen;
@@ -45,23 +44,35 @@ import com.netthreads.gdx.app.platform.StateData;
  */
 public class AttractManager
 {
-    private static final int BOX_SIZE = 32;
-    
-    private static final String TEXT_START = "START";
+	private static final int BOX_SIZE = 32;
+
+	private static final String TEXT_START = "START";
+	private static final int TEXT_START_LETTER_SIZE = 8;
+	private static final String TEXT_SELECT_STAGE = "SELECT STAGE";
+	private static final int TEXT_SELECT_STAGE_LETTER_SIZE = 8;
+	private static final String TEXT_VER = "VER ";
+	private static final int TEXT_VER_LETTER_SIZE = 6;
+	private static final String TEXT_ENDLESS = "ENDLESS";
+	private static final String TEXT_STAGE = "STAGE ";
+	private static final String TEXT_GAMEOVER = "GAMEOVER";
+	private static final int TEXT_GAMEOVER_LETTER_SIZE = 8;
+	private static final String TEXT_STAGE_CLEAR = "STAGE CLEAR";
+	private static final int TEXT_STAGE_CLEAR_LETTER_SIZE = 8;
+	
 	public static final int TITLE = 0;
 	public static final int IN_GAME = 1;
 	public static final int GAME_OVER = 2;
 	public static final int STAGE_CLEAR = 3;
 
-	private static final int BOTTOM_OFFSET = 96;
-	
+	private static final int BOTTOM_OFFSET = 64;
+
 	public int state;
 	private int cnt;
 
 	public static final int STAGE_NUM = 11;
-    public static final int SCENE_NUM = 10;
+	public static final int SCENE_NUM = 10;
 
-    private int[] stageX = new int[STAGE_NUM];
+	private int[] stageX = new int[STAGE_NUM];
 	private int[] stageY = new int[STAGE_NUM];
 
 	private BarrageManager manager;
@@ -76,8 +87,8 @@ public class AttractManager
 
 	private String version = "Unknown";
 	private StateData stateData = null;
-	
-    private IScreen screen = null;
+
+	private IScreen screen = null;
 
 	public AttractManager(IScreen screen, BarrageManager manager, Ship ship, PrefManager prMng, StateData stateData, String version)
 	{
@@ -120,7 +131,6 @@ public class AttractManager
 
 	/*
 	 * Initialize title/game/gameover/stageclear.
-	 * 
 	 */
 	private int selectedStage;
 	private boolean inDemo;
@@ -131,7 +141,7 @@ public class AttractManager
 		state = TITLE;
 		selectedStage = -1;
 		inDemo = false;
-		stBtnY = screenHeight-BOTTOM_OFFSET;
+		stBtnY = screenHeight - BOTTOM_OFFSET;
 		cnt = 0;
 		manager.initStageAsDemo(0);
 		inDemo = true;
@@ -177,7 +187,7 @@ public class AttractManager
 		if (stateData.touched)
 		{
 			stateData.touched = false;
-			
+
 			if (selectedStage >= 0 && stateData.controlY > stBtnY)
 			{
 				initGame(selectedStage);
@@ -186,18 +196,17 @@ public class AttractManager
 
 			for (int i = 0; i < STAGE_NUM; i++)
 			{
-				if (stateData.controlX > stageX[i] && stateData.controlX < stageX[i] + BOX_SIZE && stateData.controlY > stageY[i] && stateData.controlY < stageY[i] + BOX_SIZE
-						&& prMng.isOpened(i))
+				if (stateData.controlX > stageX[i] && stateData.controlX < stageX[i] + BOX_SIZE && stateData.controlY > stageY[i] && stateData.controlY < stageY[i] + BOX_SIZE && prMng.isOpened(i))
 				{
 					selectedStage = i;
 
 					if (i == 10)
 					{
-						stageStr = "ENDLESS";
+						stageStr = TEXT_ENDLESS;
 					}
 					else
 					{
-						stageStr = "STAGE " + (i + 1);
+						stageStr = TEXT_STAGE + (i + 1);
 					}
 
 					hiscoreStr = Integer.toString(prMng.getStageScore(i));
@@ -231,7 +240,7 @@ public class AttractManager
 
 			initTitle();
 		}
-		
+
 		stateData.touched = false;
 	}
 
@@ -248,12 +257,16 @@ public class AttractManager
 
 			initTitle();
 		}
-		
+
 		stateData.touched = false;
 	}
 
 	private String stageStr, hiscoreStr;
 
+	/**
+	 * Render title view.
+	 * 
+	 */
 	public void drawTitle()
 	{
 		for (int i = 0; i < STAGE_NUM; i++)
@@ -281,22 +294,22 @@ public class AttractManager
 			{
 				LetterRender.drawString(Integer.toString(i + 1), x + BOX_SIZE / 4, y + BOX_SIZE / 4, 8, Colors.LETTER_COLOR);
 			}
+			else if (i == 9)
+			{
+				LetterRender.drawString(Integer.toString(i + 1), x, y + BOX_SIZE / 4, 7, Colors.LETTER_COLOR);
+			}
 			else
-				if (i == 9)
-				{
-					LetterRender.drawString(Integer.toString(i + 1), x, y + BOX_SIZE / 4, 7, Colors.LETTER_COLOR);
-				}
-				else
-				{
-					LetterRender.drawString("0", x + BOX_SIZE / 4, y + BOX_SIZE / 4, 8, Colors.LETTER_COLOR);
-				}
+			{
+				LetterRender.drawString("0", x + BOX_SIZE / 4, y + BOX_SIZE / 4, 8, Colors.LETTER_COLOR);
+			}
 		}
-		
+
 		if (selectedStage >= 0)
 		{
 			if ((cnt & 63) < 32)
 			{
-				LetterRender.drawString(TEXT_START, (screenWidth / 2)-TEXT_START.length(), stBtnY + 6, 8, Colors.LETTER_COLOR);
+				int startXPos = centreText(screenWidth ,TEXT_START, TEXT_START_LETTER_SIZE);
+				LetterRender.drawString(TEXT_START, startXPos, stBtnY + 6, TEXT_START_LETTER_SIZE, Colors.LETTER_COLOR);
 			}
 			screen.drawLine(0, stBtnY, screenWidth, stBtnY, Colors.BOX_COLOR1);
 			LetterRender.drawStringFromRight(stageStr, screenWidth, 40, 10, Colors.LETTER_COLOR);
@@ -305,22 +318,29 @@ public class AttractManager
 		else
 		{
 
-			LetterRender.drawString("VER " + version, 4, 40, 4, Colors.LETTER_COLOR);
-			LetterRender.drawString("SELECT STAGE", 4, screenHeight - BOTTOM_OFFSET, 8, Colors.LETTER_COLOR);
+			LetterRender.drawString(TEXT_VER + version, 4, 40, TEXT_VER_LETTER_SIZE, Colors.LETTER_COLOR);
+			LetterRender.drawString(TEXT_SELECT_STAGE, centreText(screenWidth ,TEXT_SELECT_STAGE, TEXT_START_LETTER_SIZE), screenHeight - BOTTOM_OFFSET, TEXT_SELECT_STAGE_LETTER_SIZE, Colors.LETTER_COLOR);
 		}
 	}
 
+	/**
+	 * Title board.
+	 * 
+	 */
 	public void drawTitleBoard()
 	{
 		int x = 4, y = 4;
 
-		
 		for (int i = 0; i < TITLE_IMAGE_NUM; i++, x += 33)
 		{
 			screen.drawBitmap(titleImage[i], x, y);
 		}
 	}
 
+	/**
+	 * Game over message.
+	 * 
+	 */
 	public void drawGameover()
 	{
 		int y;
@@ -332,9 +352,13 @@ public class AttractManager
 		{
 			y = screenHeight / 3;
 		}
-		LetterRender.drawString("GAMEOVER", screenWidth / 4, y, 8, Colors.LETTER_COLOR);
+		LetterRender.drawString(TEXT_GAMEOVER, centreText(screenWidth, TEXT_GAMEOVER, TEXT_GAMEOVER_LETTER_SIZE), y, TEXT_GAMEOVER_LETTER_SIZE, Colors.LETTER_COLOR);
 	}
 
+	/**
+	 * Clear stage message.
+	 * 
+	 */
 	public void drawClear()
 	{
 		int y;
@@ -348,7 +372,22 @@ public class AttractManager
 			y = screenHeight / 3;
 		}
 
-		LetterRender.drawString("STAGE CLEAR", screenWidth / 8, y, 8, Colors.LETTER_COLOR);
+		LetterRender.drawString(TEXT_STAGE_CLEAR, centreText(screenWidth ,TEXT_STAGE_CLEAR, TEXT_STAGE_CLEAR_LETTER_SIZE), y, TEXT_STAGE_CLEAR_LETTER_SIZE, Colors.LETTER_COLOR);
 	}
 
+	/**
+	 * Centre text position.
+	 * 
+	 * @param screenWidth
+	 * @param text
+	 * @param letterSize
+	 * 
+	 * @return The 
+	 */
+	private int centreText(int screenWidth, String text, int letterSize)
+	{
+		int centreX = (screenWidth / 2) - (text.length() * letterSize);
+		
+		return centreX;
+	}
 }
