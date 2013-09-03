@@ -12,10 +12,10 @@ The codebase consists of a slightly modified set of the original game files (in 
 
 My original contributions were:
 
-- rewrite the bulletml parser to use XML Pull parser.
-- abstract the drawing primitives.
-- OpenGL and Canvas renderers.
-- difficulty settings.
+- rewrite the bulletml parser to use XML Pull parser. This was so it would work with Android.
+- abstract the drawing primitives to ease the application of different rendering modes.
+- OpenGL and Canvas renderers because I was being bloody minded.
+- difficulty settings as the original on a phone was insanely difficult (it still is..a bit).
 
 The only renderer now is OpenGL as that's what LibGDX uses.
 
