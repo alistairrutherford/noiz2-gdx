@@ -30,6 +30,14 @@ In addition to these great features this version also has:
 Now that I have ported it over to use LibGDX it brings some nice additions such as the moving star background and the sliding transitions between screens.
 Plus I am tidying up a lot of the original code as well.
 
+Menu  view.
+
+![Demo](https://github.com/alistairrutherford/images/raw/master/noiz2_3.png) 
+
+Settings View.
+
+![Demo](https://github.com/alistairrutherford/images/raw/master/noiz2_4.png) 
+
 Launch view.
 
 ![Demo](https://github.com/alistairrutherford/images/raw/master/noiz2_1.png) 
@@ -37,6 +45,14 @@ Launch view.
 Main Game
 
 ![Demo](https://github.com/alistairrutherford/images/raw/master/noiz2_2.png)
+
+Boss Level
+
+![Demo](https://github.com/alistairrutherford/images/raw/master/noiz2_6.png)
+
+About View.
+
+![Demo](https://github.com/alistairrutherford/images/raw/master/noiz2_5.png) 
 
 
 Build Instructions
