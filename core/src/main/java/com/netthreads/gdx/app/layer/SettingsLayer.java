@@ -130,8 +130,9 @@ public class SettingsLayer extends Layer
 
 		table.setSize(getWidth(), getHeight());
 
-		table.row();
 		table.add(titleLabel).expandY().expandX();
+		table.row();
+		table.add(new Label("-----------", skin));
 		table.row();
 		table.add(soundLabel).expandY();
 		table.row();
@@ -152,6 +153,8 @@ public class SettingsLayer extends Layer
 		table.add(profileLabel).expandY();
 		table.row();
 		table.add(profileCheckBox);
+		table.row();
+		table.add(new Label("-----------", skin));
 		table.row();
 
 		table.setFillParent(true);

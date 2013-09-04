@@ -22,22 +22,17 @@ package com.netthreads.gdx.app.layer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.netthreads.gdx.app.core.Noiz2GDX;
 import com.netthreads.gdx.app.definition.AppEvents;
-import com.netthreads.gdx.app.definition.AppTextureDefinitions;
 import com.netthreads.libgdx.director.AppInjector;
 import com.netthreads.libgdx.director.Director;
 import com.netthreads.libgdx.scene.Layer;
-import com.netthreads.libgdx.texture.TextureCache;
-import com.netthreads.libgdx.texture.TextureDefinition;
 
 /**
- * Scene layer.
+ * About layer.
  * 
  */
 public class AboutLayer extends Layer
@@ -45,29 +40,26 @@ public class AboutLayer extends Layer
 	private static final String UI_FILE = "data/uiskin.json";
 	private static final String URL_LABEL_FONT = "default-font";
 
-	private Table table;
-	private TextureRegion logo;
 	private Skin skin;
-	private Label urlLabel;
-	private Label versionLabel;
-	private Label helpTextLabel;
 
-	private static final String instructionsText = "Control your ship and avoid the barrage.\n" +
-			"To destroy enemies, position your ship on the front of an enemy. \n" +
-			"A laser locks the enemy and destroy it.\n" +
-			"A green star is the bonus item. \n"+"" +
-			"A score of the item(displayed at the right-up corner) \n" +
-			"increases if you get items continuously.";
+	private static final String[] helpText = 
+	{ 
+		"Control your ship",
+		"and avoid the barrage.",
+		"To destroy enemies, ", 
+		"position your ship", 
+		"in front of an enemy.",
+		"A laser locks onto enemy", 
+		"and destroys it.",
+		"A green star is a bonus",
+		"and shield boost"
+	};
+	
 	
 	/**
 	 * The one and only director.
 	 */
 	private Director director;
-
-	/**
-	 * Singletons.
-	 */
-	private TextureCache textureCache;
 
 	/**
 	 * About layer.
@@ -81,14 +73,11 @@ public class AboutLayer extends Layer
 
 		director = AppInjector.getInjector().getInstance(Director.class);
 
-		textureCache = AppInjector.getInjector().getInstance(TextureCache.class);
-
 		Gdx.input.setCatchBackKey(true);
 
 		loadTextures();
 
 		buildElements();
-
 	}
 
 	/**
@@ -98,9 +87,6 @@ public class AboutLayer extends Layer
 	private void loadTextures()
 	{
 		skin = new Skin(Gdx.files.internal(UI_FILE));
-
-		TextureDefinition definition = textureCache.getDefinition(AppTextureDefinitions.TEXTURE_LIBGDX_LOGO);
-		logo = textureCache.getTexture(definition);
 	}
 
 	/**
@@ -109,53 +95,47 @@ public class AboutLayer extends Layer
 	 */
 	private void buildElements()
 	{
-		
-		helpTextLabel = new Label(instructionsText, skin, URL_LABEL_FONT, Color.WHITE);
-		helpTextLabel.setWrap(true);
-		
-		Table topTable = new Table();
-		topTable.setWidth(getWidth());
-		topTable.add(helpTextLabel);
-		
-		topTable.pack();
-
-		topTable.setFillParent(true);		
-		addActor(topTable);
-		
-		// ---------------------------------------------------------------
-		// Background.
-		// ---------------------------------------------------------------
-		Image image = new Image(logo);
-
-		image.setWidth(getWidth());
-		image.setHeight(getHeight());
-
 		// ---------------------------------------------------------------
 		// Labels
 		// ---------------------------------------------------------------
-		urlLabel = new Label("www.netthreads.co.uk", skin, URL_LABEL_FONT, Color.WHITE);
+		final Label urlLabel = new Label("www.netthreads.co.uk", skin, URL_LABEL_FONT, Color.YELLOW);
+		final Label versionLabel = new Label(Noiz2GDX.VERSION_TEXT, skin, URL_LABEL_FONT, Color.CYAN);
+		final Label copyrightLabel = new Label("Copyright", skin, URL_LABEL_FONT, Color.WHITE);
+		final Label copyrightALabel = new Label("Kenta Cho 2002", skin, URL_LABEL_FONT, Color.WHITE);
+		final Label copyrightBLabel = new Label("Alistair. Rutherford 2013", skin, URL_LABEL_FONT, Color.WHITE);
 
-		versionLabel = new Label(Noiz2GDX.VERSION_TEXT, skin, URL_LABEL_FONT, Color.WHITE);
-				
-		// ---------------------------------------------------------------
-		// Table
-		// ---------------------------------------------------------------
-		table = new Table();
+		final Table topTable = new Table();
 
-		table.size(getWidth(), getHeight());
+		topTable.row();
+		topTable.add(urlLabel);
 
-		table.row();
-		table.add(urlLabel);
-		table.row();
-		table.add(image);
-		table.row();
-		table.add(versionLabel);
+
+		topTable.row();
+		topTable.add(copyrightLabel).expandX();
+		topTable.row();
+		topTable.add(copyrightALabel).expandX();
+		topTable.row();
+		topTable.add(copyrightBLabel).expandX();
+		topTable.row();
+		topTable.add(versionLabel);
+		topTable.row();
+		topTable.add(new Label("-----------", skin));
+		topTable.row();
+
+		for (String text : helpText)
+		{
+			Label helpLabel = new Label(text, skin, URL_LABEL_FONT, Color.WHITE);
+			helpLabel.setWrap(false);
+			topTable.row();
+			topTable.add(helpLabel);
+		}
+
+
+		topTable.setFillParent(true);
 		
-		table.pack();
-
-		table.setFillParent(true);
-
-		addActor(table);
+		topTable.pack();
+		
+		addActor(topTable);
 	}
 
 	/**
