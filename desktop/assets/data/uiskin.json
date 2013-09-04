@@ -1,5 +1,11 @@
 {
-com.badlogic.gdx.graphics.g2d.BitmapFont: { default-font: { file: default.fnt }, normal-font: { file: font.fnt }, large-font: { file: digital-7_60.fnt }},
+com.badlogic.gdx.graphics.g2d.BitmapFont: { 
+	default-font: { file: radio-land-16.fnt }, 
+	normal-font: { file: radio-land-16.fnt },
+	medium-font: { file: radio-land-32.fnt }, 
+	large-font: { file: radio-land-48.fnt },
+	xtra-large-font: { file: radio-land-64.fnt }
+},
 com.badlogic.gdx.graphics.Color: {
 	green: { a: 1, b: 0, g: 1, r: 0 },
 	white: { a: 1, b: 1, g: 1, r: 1 },

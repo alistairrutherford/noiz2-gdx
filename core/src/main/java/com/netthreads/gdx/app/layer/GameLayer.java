@@ -55,8 +55,10 @@ import com.netthreads.libgdx.sound.SoundCache;
  */
 public class GameLayer extends Layer implements ActorEventObserver
 {
-	private static final String UI_FILE = "data/uiskin60.json";
-	private static final String URL_LABEL_FONT_SMALL = "default-font";
+	private static final String TEXT_NOIZ2 = "NOIZ2";
+	
+	private static final String UI_FILE = "data/uiskin.json";
+	private static final String URL_LABEL_FONT_SMALL = "medium-font";
 	
 	/**
 	 * The one and only director.
@@ -94,6 +96,7 @@ public class GameLayer extends Layer implements ActorEventObserver
 		setHeight(height);
 		
 		// ---------------------------------------------------------------
+		// Singletons.
 		// ---------------------------------------------------------------
 		director = AppInjector.getInjector().getInstance(Director.class);
 		soundCache = AppInjector.getInjector().getInstance(SoundCache.class);
@@ -123,7 +126,7 @@ public class GameLayer extends Layer implements ActorEventObserver
 		int width = Math.round(getWidth());
 		int height = Math.round(getHeight());
 		
-		titleLabel = new Label("NOIZ2", skin, URL_LABEL_FONT_SMALL, Color.YELLOW);
+		titleLabel = new Label(TEXT_NOIZ2, skin, URL_LABEL_FONT_SMALL, Color.YELLOW);
 		titleLabel.setX(0);
 		titleLabel.setY(32);
 		

@@ -43,8 +43,8 @@ import com.netthreads.libgdx.scene.Layer;
  */
 public class SettingsLayer extends Layer
 {
-	private static final String UI_FILE = "data/uiskin60.json";
-	private static final String URL_LABEL_FONT = "default-font";
+	private static final String UI_FILE = "data/uiskin.json";
+	private static final String URL_LABEL_FONT = "medium-font";
 
 	private Table table;
 	private Skin skin;
