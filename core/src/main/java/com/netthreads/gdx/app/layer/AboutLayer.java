@@ -50,8 +50,9 @@ public class AboutLayer extends Layer
 	private Skin skin;
 	private Label urlLabel;
 	private Label versionLabel;
+	private Label helpTextLabel;
 
-	private static final String instructionsText = "Control your ship and avoid the barrage." +
+	private static final String instructionsText = "Control your ship and avoid the barrage.\n" +
 			"To destroy enemies, position your ship on the front of an enemy. \n" +
 			"A laser locks the enemy and destroy it.\n" +
 			"A green star is the bonus item. \n"+"" +
@@ -108,6 +109,19 @@ public class AboutLayer extends Layer
 	 */
 	private void buildElements()
 	{
+		
+		helpTextLabel = new Label(instructionsText, skin, URL_LABEL_FONT, Color.WHITE);
+		helpTextLabel.setWrap(true);
+		
+		Table topTable = new Table();
+		topTable.setWidth(getWidth());
+		topTable.add(helpTextLabel);
+		
+		topTable.pack();
+
+		topTable.setFillParent(true);		
+		addActor(topTable);
+		
 		// ---------------------------------------------------------------
 		// Background.
 		// ---------------------------------------------------------------
@@ -122,21 +136,21 @@ public class AboutLayer extends Layer
 		urlLabel = new Label("www.netthreads.co.uk", skin, URL_LABEL_FONT, Color.WHITE);
 
 		versionLabel = new Label(Noiz2GDX.VERSION_TEXT, skin, URL_LABEL_FONT, Color.WHITE);
-
+				
 		// ---------------------------------------------------------------
 		// Table
 		// ---------------------------------------------------------------
 		table = new Table();
 
-		table.size((int) getWidth(), (int) getHeight());
+		table.size(getWidth(), getHeight());
 
 		table.row();
-		table.add(urlLabel).expandY().expandX();
+		table.add(urlLabel);
 		table.row();
 		table.add(image);
 		table.row();
-		table.add(versionLabel).expandY().expandX();
-
+		table.add(versionLabel);
+		
 		table.pack();
 
 		table.setFillParent(true);
