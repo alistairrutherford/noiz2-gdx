@@ -62,6 +62,7 @@ https://github.com/alistairrutherford/noiz2-gdx/wiki/Build-Instructions
 
 License
 --------
+[Copyright - Kenta Cho 2002 - http://www.asahi-net.or.jp/~cs8k-cyu]
 [Copyright - Alistair Rutherford 2013 - www.netthreads.co.uk]
 
 Licensed under the Apache License, Version 2.0 (the "License");
