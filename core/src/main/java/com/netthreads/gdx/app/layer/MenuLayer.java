@@ -22,11 +22,11 @@ package com.netthreads.gdx.app.layer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.netthreads.gdx.app.definition.AppEvents;
 import com.netthreads.libgdx.director.AppInjector;
@@ -42,18 +42,13 @@ public class MenuLayer extends Layer
 	private static final String UI_FILE = "data/uiskin.json";
 	private static final String URL_LABEL_FONT = "large-font";
 	
-	private Table table;
 	private Skin skin;
-	private Label titleLabelA;
-	private Button startButton;
-	private Button settingsButton;
-	private Button aboutButton;
-
+	
 	/**
 	 * The one and only director.
 	 */
 	private Director director;
-
+	
 	/**
 	 * Construct the screen.
 	 * 
@@ -63,16 +58,16 @@ public class MenuLayer extends Layer
 	{
 		setWidth(width);
 		setHeight(height);
-
+		
 		director = AppInjector.getInjector().getInstance(Director.class);
 		
 		Gdx.input.setCatchBackKey(true);
-
+		
 		loadTextures();
-
+		
 		buildElements();
 	}
-
+	
 	/**
 	 * Load view textures.
 	 * 
@@ -81,42 +76,69 @@ public class MenuLayer extends Layer
 	{
 		skin = new Skin(Gdx.files.internal(UI_FILE));
 	}
-
+	
 	/**
 	 * Build view elements.
 	 * 
 	 */
 	private void buildElements()
 	{
-		// Title
-		titleLabelA = new Label("Noiz2", skin, URL_LABEL_FONT, Color.YELLOW);
-
+		
+		Table tableContainer = new Table();
+		
 		// ---------------------------------------------------------------
-		// Buttons.
-		// ---------------------------------------------------------------
-		startButton = new TextButton("Start", skin);
-		settingsButton = new TextButton("Settings", skin);
-		aboutButton = new TextButton("About", skin);
-
 		// ---------------------------------------------------------------
 		// Table
 		// ---------------------------------------------------------------
-		table = new Table();
+		// ---------------------------------------------------------------
+		Table tableTop = new Table();
 
-		table.setSize(getWidth(), getHeight());
+		// Title
+		final Label titleLabelA = new Label("Noiz2", skin, URL_LABEL_FONT, Color.YELLOW);
+		final TextButton startButton = new TextButton("Start", skin);
+		
+		tableTop.add(titleLabelA);
+		tableTop.row();
+		tableTop.add(startButton);
+		tableTop.scale(1.5f);
+		
+		tableTop.pack();
+		tableTop.setFillParent(false);
 
-		table.row();
-		table.add(titleLabelA).expandY().expandX();
-		table.row();
-		table.add(startButton).expandY().expandX();
-		table.row();
-		table.add(settingsButton).expandY().expandX();
-		table.row();
-		table.add(aboutButton).expandY().expandX();
+		// ---------------------------------------------------------------
+		// ---------------------------------------------------------------
+		// Table
+		// ---------------------------------------------------------------
+		// ---------------------------------------------------------------
+		Table tableBottom = new Table();
 
-		table.setFillParent(true);
+		final TextButton settingsButton = new TextButton("Settings", skin);
+		final TextButton aboutButton = new TextButton("About", skin);
+		
+		tableBottom.setSize(getWidth(), getHeight());
+		
+		tableBottom.row();
+		tableBottom.add(settingsButton);
+		tableBottom.row();
+		tableBottom.add(aboutButton);
+		
+		tableBottom.pack();
+		tableBottom.setFillParent(false);
+		
+		// ---------------------------------------------------------------
+		// ---------------------------------------------------------------
 
-		table.pack();
+		tableContainer.add(tableTop);
+		tableContainer.row();
+		tableContainer.add(tableBottom);
+
+		tableContainer.setFillParent(true);
+
+		addActor(tableContainer);
+		
+		// ---------------------------------------------------------------
+		// Listeners
+		// ---------------------------------------------------------------
 		
 		// Listener.
 		startButton.addListener(new ClickListener()
@@ -126,9 +148,9 @@ public class MenuLayer extends Layer
 			{
 				director.sendEvent(AppEvents.EVENT_TRANSITION_TO_GAME_SCENE, event.getRelatedActor());
 			}
-
+			
 		});
-
+		
 		// Listener.
 		settingsButton.addListener(new ClickListener()
 		{
@@ -137,9 +159,9 @@ public class MenuLayer extends Layer
 			{
 				director.sendEvent(AppEvents.EVENT_TRANSITION_TO_SETTINGS_SCENE, event.getRelatedActor());
 			}
-
+			
 		});
-
+		
 		// Listener.
 		aboutButton.addListener(new ClickListener()
 		{
@@ -148,12 +170,9 @@ public class MenuLayer extends Layer
 			{
 				director.sendEvent(AppEvents.EVENT_TRANSITION_TO_ABOUT_SCENE, event.getRelatedActor());
 			}
-
+			
 		});
-
-		// Add table to view
-		addActor(table);
-
+		
 	}
-
+	
 }
