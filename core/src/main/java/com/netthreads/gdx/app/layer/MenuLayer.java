@@ -26,7 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Widget;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.netthreads.gdx.app.definition.AppEvents;
 import com.netthreads.libgdx.director.AppInjector;
@@ -41,6 +41,7 @@ public class MenuLayer extends Layer
 {
 	private static final String UI_FILE = "data/uiskin.json";
 	private static final String URL_LABEL_FONT = "large-font";
+	private static final String URL_LABEL_LARGE_FONT = "xtra-large-font";
 	
 	private Skin skin;
 	
@@ -95,13 +96,17 @@ public class MenuLayer extends Layer
 
 		// Title
 		final Label titleLabelA = new Label("Noiz2", skin, URL_LABEL_FONT, Color.YELLOW);
-		final TextButton startButton = new TextButton("Start", skin);
+		final TextButton startButton = new TextButton("Start", skin.get("large", TextButtonStyle.class));
 		
 		tableTop.add(titleLabelA);
 		tableTop.row();
 		tableTop.add(startButton);
-		tableTop.scale(1.5f);
-		
+
+//		tableTop.setClip(true);
+//		tableTop.setOrigin(tableTop.getPrefWidth() / 1, tableTop.getPrefHeight() / 1);
+//		tableTop.setRotation(0);
+//		tableTop.setScaleX(1.5f);		
+
 		tableTop.pack();
 		tableTop.setFillParent(false);
 
