@@ -41,7 +41,6 @@ public class MenuLayer extends Layer
 {
 	private static final String UI_FILE = "data/uiskin.json";
 	private static final String URL_LABEL_FONT = "large-font";
-	private static final String URL_LABEL_LARGE_FONT = "xtra-large-font";
 	
 	private Skin skin;
 	
@@ -101,11 +100,6 @@ public class MenuLayer extends Layer
 		tableTop.add(titleLabelA);
 		tableTop.row();
 		tableTop.add(startButton);
-
-//		tableTop.setClip(true);
-//		tableTop.setOrigin(tableTop.getPrefWidth() / 1, tableTop.getPrefHeight() / 1);
-//		tableTop.setRotation(0);
-//		tableTop.setScaleX(1.5f);		
 
 		tableTop.pack();
 		tableTop.setFillParent(false);
