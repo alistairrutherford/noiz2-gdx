@@ -31,8 +31,7 @@ Plus I am tidying up a lot of the original code as well.
 Performance
 -----------
 
-It's playable on my Nexus 4 but runs slowly on my Nexus 1. This is down to the renderer which is pretty naive and doesn't take the same approach as the original renderer (which ran pretty good on my old G1 would you believe). Anyone eyeing this up for a possble app store gazump might bear that in mind. If you rewrite the renderer before me then feel free to stick your name on 'About' and publish. Same note as the Google Code version - do not remove attribution. It's not big and it's not clever FFS.
-
+It's playable on my Nexus 4 but runs slowly on my Nexus 1. This is down to the renderer which is pretty naive and doesn't take the same approach as the original renderer (which ran pretty good on my old G1 would you believe).
 Screenshots
 -----------
 
