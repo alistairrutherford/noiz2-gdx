@@ -15,7 +15,7 @@ public class Noiz2Activity extends AndroidApplication
 	{
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		config.useGL20 = true;
+		
 		initialize(new Noiz2GDX(), config);
 	}
 }

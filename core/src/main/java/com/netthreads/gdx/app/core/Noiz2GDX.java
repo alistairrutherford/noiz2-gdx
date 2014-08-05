@@ -92,8 +92,7 @@ public class Noiz2GDX extends InputAdapter implements ApplicationListener, Actor
 		soundCache = AppInjector.getInjector().getInstance(SoundCache.class);
 
 		// Set initial width and height.
-		director.setWidth(DEFAULT_WIDTH);
-		director.setHeight(DEFAULT_HEIGHT);
+		director.setWidthHeight(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
 		// Add this as an event observer.
 		director.registerEventHandler(this);
@@ -116,8 +115,8 @@ public class Noiz2GDX extends InputAdapter implements ApplicationListener, Actor
 	@Override
 	public void resize(int width, int height)
 	{
-		// Recalculate scale factors for touch events.
-		director.recalcScaleFactors(width, height);
+		// Resize view-port and recalculate scale factors for touch events.
+		director.resize(width, height);
 	}
 
 	/**

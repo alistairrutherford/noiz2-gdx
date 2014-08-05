@@ -4,23 +4,17 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.netthreads.gdx</groupId>
 	<artifactId>noiz2-gdx</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Noiz2 GDX</name>
+	<name>Noiz2 GDX Parent</name>
 
 	<properties>
-		<gdx.version>0.9.9-SNAPSHOT</gdx.version>
-		<android.version>2.1.2</android.version>
-		<android.maven.version>3.6.1</android.maven.version>
+		<gdx.version>1.2.0</gdx.version>
+		<android.version>4.1.1.4</android.version>
+		<android.maven.version>3.6.0</android.maven.version>
 		<gwt.version>2.5.0</gwt.version>
+		<netthreads.libgdx.version>1.0.5-SNAPSHOT</netthreads.libgdx.version>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>gdx-nightlies</id>
-			<url>http://libgdx.badlogicgames.com/nightlies/maven</url>
-		</repository>
-	</repositories>
 
 	<build>
 		<plugins>
@@ -67,4 +61,5 @@
 		<module>desktop</module>
 		<module>android</module>
 	</modules>
+
 </project>

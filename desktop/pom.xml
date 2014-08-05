@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.netthreads.gdx</groupId>
 		<artifactId>noiz2-gdx</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>noiz2-gdx-desktop</artifactId>
@@ -57,15 +57,22 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.badlogic.gdx</groupId>
+			<groupId>com.badlogicgames.gdx</groupId>
 			<artifactId>gdx</artifactId>
 			<version>${gdx.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.badlogic.gdx</groupId>
+			<groupId>com.badlogicgames.gdx</groupId>
 			<artifactId>gdx-backend-lwjgl</artifactId>
 			<version>${gdx.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-platform</artifactId>
+			<version>${gdx.version}</version>
+			<classifier>natives-desktop</classifier>
 		</dependency>
 
 		<dependency>
@@ -78,7 +85,7 @@
 		<dependency>
 			<groupId>com.netthreads.libgdx</groupId>
 			<artifactId>netthreads-libgdx</artifactId>
-			<version>1.0.4-SNAPSHOT</version>
+			<version>${netthreads.libgdx.version}</version>
 		</dependency>
 
 		<dependency>

@@ -28,7 +28,7 @@ import jp.gr.java_conf.abagames.noiz2.Ship;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -219,7 +219,7 @@ public class GameLayer extends Layer implements ActorEventObserver
 	 * 
 	 */
 	@Override
-	public void draw(SpriteBatch batch, float parentAlpha)
+	public void draw(Batch batch, float parentAlpha)
 	{
 		if (attractManager.state == AttractManager.TITLE)
 		{

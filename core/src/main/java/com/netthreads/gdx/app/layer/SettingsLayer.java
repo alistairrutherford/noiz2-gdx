@@ -103,7 +103,7 @@ public class SettingsLayer extends Layer
 		
 		final CheckBox checkBox = new CheckBox("", skin);
 		checkBox.setChecked(gameProperties.getSound());
-		checkBox.size(20, 20);
+		checkBox.setSize(20, 20);
 		final Label soundLabel = new Label(ApplicationProperties.SOUND_TEXT, skin);
 		
 		final Slider slider = new Slider(0, 10, 1, false, skin);
@@ -120,7 +120,7 @@ public class SettingsLayer extends Layer
 
 		final CheckBox profileCheckBox = new CheckBox("", skin);
 		profileCheckBox.setChecked(gameProperties.getShowProfile());
-		profileCheckBox.size(20, 20);
+		profileCheckBox.setSize(20, 20);
 		final Label profileLabel = new Label(ApplicationProperties.SHOW_PROFILE_KEY, skin);
 		
 		// ---------------------------------------------------------------

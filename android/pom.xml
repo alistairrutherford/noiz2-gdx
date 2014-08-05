@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.netthreads.gdx</groupId>
 		<artifactId>noiz2-gdx</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
+        <version>1.0.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>noiz2-gdx-android</artifactId>
@@ -13,38 +13,44 @@
 	<name>Noiz2 Android</name>
 
 	<properties>
-		<android.sdk.path>C:\development\java\android\sdk\android-sdk-windows</android.sdk.path>
+		<android.sdk.path>C:/development/java/android/sdk/android-sdk-windows</android.sdk.path>
 	</properties>
-	
+
 	<dependencies>
-	    
+
 		<dependency>
 			<groupId>com.netthreads.gdx</groupId>
 			<artifactId>noiz2-gdx-core</artifactId>
 			<version>${project.version}</version>
 			<exclusions>
-			<exclusion>
-			  <groupId>xpp3</groupId>
-			  <artifactId>xpp3</artifactId>
-			</exclusion>		
+				<exclusion>
+					<groupId>xpp3</groupId>
+					<artifactId>xpp3</artifactId>
+				</exclusion>
 			</exclusions>
-	</dependency>
+		</dependency>
 
 		<dependency>
-			<groupId>com.badlogic.gdx</groupId>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-backend-gwt</artifactId>
+			<version>${gdx.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
 			<artifactId>gdx-backend-android</artifactId>
 			<version>${gdx.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.badlogic.gdx</groupId>
+			<groupId>com.badlogicgames.gdx</groupId>
 			<artifactId>gdx-platform</artifactId>
 			<version>${gdx.version}</version>
 			<classifier>natives-armeabi</classifier>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.badlogic.gdx</groupId>
+			<groupId>com.badlogicgames.gdx</groupId>
 			<artifactId>gdx-platform</artifactId>
 			<version>${gdx.version}</version>
 			<classifier>natives-armeabi-v7a</classifier>
@@ -57,12 +63,13 @@
 			<version>${android.version}</version>
 			<scope>provided</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
-	    <!-- output APK doesn't contain version number, needed for Intellij Idea -->
-	    <finalName>${project.artifactId}</finalName>
-	    
+		<!-- output APK doesn't contain version number, needed for Intellij Idea -->
+		<finalName>${project.artifactId}</finalName>
+
 		<plugins>
 			<!-- Responsible for unpacking the shared libraries to the libs/ folder -->
 			<plugin>
@@ -115,4 +122,5 @@
 			</plugin>
 		</plugins>
 	</build>
+
 </project>

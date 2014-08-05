@@ -29,6 +29,9 @@ public class Noiz2GDXDesktop
 	public static void main(String[] args)
 	{
 		// last parameter false = use OpenGL 1.1 and not 2.1+
-		new LwjglApplication(new Noiz2GDX(), APPLICATION_NAME, Noiz2GDX.DEFAULT_WIDTH, Noiz2GDX.DEFAULT_HEIGHT, false);
+		new LwjglApplication(new Noiz2GDX(), 
+				APPLICATION_NAME, 
+				Noiz2GDX.DEFAULT_WIDTH, 
+				Noiz2GDX.DEFAULT_HEIGHT);
 	}
 }

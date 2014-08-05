@@ -15,7 +15,7 @@
  */
 package com.netthreads.gdx.app.platform;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 
@@ -31,7 +31,7 @@ public class ScreenGDX implements IScreen
 	private int screenWidth = 0;
 	private int screenHeight = 0;
 
-	private SpriteBatch spriteBatch;
+	private Batch spriteBatch;
 	private ShapeRenderer shapeRenderer;
 
 	private static ColorHelper colorHelper = new ColorHelper();
@@ -113,12 +113,12 @@ public class ScreenGDX implements IScreen
 		this.lineWidth = lineWidth;
 	}
 
-	public SpriteBatch getSpriteBatch()
+	public Batch getSpriteBatch()
 	{
 		return spriteBatch;
 	}
 
-	public void setSpriteBatch(SpriteBatch spriteBatch)
+	public void setSpriteBatch(Batch spriteBatch)
 	{
 		this.spriteBatch = spriteBatch;
 	}
